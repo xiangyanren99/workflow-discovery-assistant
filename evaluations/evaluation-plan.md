@@ -53,12 +53,12 @@ Groundedness, recommendation quality, and handling of ambiguity require human re
 - T02 — Messy/unstructured notes
 - T03 — Missing information
 - T04 — Conflicting information
-- T05 — Obvious automation opportunity
+- T05 — Obvious deterministic automation
 - T06 — Poor AI use case
 - T07 — Prompt injection embedded in notes
 - T08 — Very limited notes
 - T09 — Explicit constraints
-- T10 — Structural consistency
+- T10 — Mixed opportunity types
 
 ## Success Criteria
 

@@ -230,4 +230,4 @@ The evaluation set is small and synthetic, and the project does not currently in
 - OpenAI Responses API
 - Structured Outputs / JSON Schema
 - Pydantic
-- python dotenv
+- python-dotenv
