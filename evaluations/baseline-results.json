@@ -1,0 +1,568 @@
+[
+  {
+    "id": "T01",
+    "name": "Clear workflow",
+    "status": "SUCCESS",
+    "analysis": {
+      "workflow_name": "Home Health Referral Intake",
+      "summary": "Referral coordinators receive home health referrals through a shared email inbox, review them for required documents, manually enter them into an intake queue, and request missing documents from referring organizations.",
+      "stakeholders": [
+        "Referral coordinators",
+        "Referring organizations"
+      ],
+      "current_process": [
+        "Receive new home health referrals through a shared email inbox.",
+        "Review each referral and check whether required documents are attached.",
+        "Manually enter the referral into the intake queue.",
+        "If documents are missing, email the referring organization to request them."
+      ],
+      "pain_points": [
+        "Manual referral data entry takes significant time.",
+        "Missing documents require follow-up communication with the referring organization."
+      ],
+      "automation_opportunities": [
+        {
+          "title": "Extract referral details into the intake queue",
+          "opportunity_type": "AI",
+          "description": "Use AI to extract relevant referral information from referral emails and attachments, then prepare or populate an intake-queue entry for coordinator review.",
+          "rationale": "Referral information arrives through email and attached documents, which may be unstructured. AI-based extraction could reduce manual data entry, but the notes do not establish document formats or the fields required for intake, so human validation and further discovery are needed."
+        },
+        {
+          "title": "Check for required referral documents",
+          "opportunity_type": "Deterministic Automation",
+          "description": "Implement a rules-based check that identifies whether the required documents are present before the referral proceeds in the intake workflow.",
+          "rationale": "The workflow includes a defined check for required document attachments. If the required document types can be specified, deterministic validation is more appropriate than AI."
+        },
+        {
+          "title": "Send missing-document follow-up emails",
+          "opportunity_type": "Deterministic Automation",
+          "description": "When required documents are missing, automatically generate and send a standardized email to the referring organization, subject to coordinator review or configured rules.",
+          "rationale": "The trigger\u2014missing required documents\u2014and the follow-up action are rule-based. Automation could reduce repetitive communication, although recipient information, templates, and approval requirements are not provided."
+        }
+      ],
+      "risks": [
+        "Automated extraction or intake entry may introduce errors if referral information is incomplete or ambiguous.",
+        "The required document list and validation criteria are not specified.",
+        "It is unclear whether coordinators must review and approve automated entries or emails before they are sent.",
+        "The notes do not identify the intake-queue system or how it accepts new entries.",
+        "The shared inbox may contain referrals in varying formats, but the extent of that variation is unknown."
+      ],
+      "open_questions": [
+        "What documents are required for each referral, and are requirements consistent across referrals?",
+        "What fields must be entered into the intake queue?",
+        "What formats do referral emails and attachments use?",
+        "What system or application hosts the intake queue, and does it support integration or structured import?",
+        "How should missing documents be identified when attachments are mislabeled, unreadable, or embedded in other files?",
+        "Should coordinators review extracted data and follow-up emails before submission or sending?",
+        "How are referring organizations identified and how should their contact information be retrieved?",
+        "Are there exceptions or referral types that require special handling?"
+      ],
+      "recommended_next_steps": [
+        "Document the required referral documents and intake-queue fields.",
+        "Collect representative referral emails and attachments, including examples with missing documents, to assess format variability and extraction accuracy.",
+        "Map the intake-queue system and determine available integration or import options.",
+        "Prototype rules-based document presence checks and measure how often coordinator review is needed.",
+        "Define human review, correction, and escalation steps before automating intake entry or outbound emails."
+      ]
+    }
+  },
+  {
+    "id": "T02",
+    "name": "Messy unstructured notes",
+    "status": "SUCCESS",
+    "analysis": {
+      "workflow_name": "Ticket Intake and Prioritization",
+      "summary": "Support tickets are received primarily by email and sometimes by phone. Details are manually copied into a queue, with unclear ownership. Some tickets are reviewed by a manager, but coverage is inconsistent.",
+      "stakeholders": [
+        "Analyst team",
+        "Manager",
+        "People submitting support tickets"
+      ],
+      "current_process": [
+        "Tickets arrive mostly through email and occasionally by phone.",
+        "Someone copies ticket details into a queue.",
+        "A manager reviews some tickets, but not all.",
+        "Tickets are prioritized, though the prioritization process is perceived as inconsistent."
+      ],
+      "pain_points": [
+        "Significant manual copy-and-paste work during ticket intake.",
+        "Unclear ownership of the ticket queue.",
+        "Inconsistent ticket prioritization.",
+        "Manager review does not appear to cover all tickets."
+      ],
+      "automation_opportunities": [
+        {
+          "title": "Standardize ticket intake and queue entry",
+          "opportunity_type": "Deterministic Automation",
+          "description": "Automatically capture defined ticket details from incoming emails into the queue, while providing a structured method for recording phone-based requests.",
+          "rationale": "The notes describe repetitive copying of ticket details. Email-to-queue processing can likely follow predefined rules; however, the required fields and queue system are not specified."
+        },
+        {
+          "title": "Define ticket ownership and review coverage",
+          "opportunity_type": "Process Change",
+          "description": "Establish clear ownership for the queue and clarify which tickets require manager review and under what conditions.",
+          "rationale": "The primary issue is unclear accountability and inconsistent review, which is a process and governance problem rather than necessarily a technology problem."
+        },
+        {
+          "title": "Standardize prioritization criteria",
+          "opportunity_type": "Process Change",
+          "description": "Create and document consistent criteria for assigning ticket priority, including how those criteria are applied and reviewed.",
+          "rationale": "Complaints about inconsistent priority indicate a need for a shared process. The notes do not establish that AI is needed to determine priority."
+        }
+      ],
+      "risks": [
+        "The current owner of the queue is unclear.",
+        "It is unknown whether email and phone requests contain consistent information.",
+        "Manager review is applied inconsistently or is not clearly defined.",
+        "The queue system and its integration capabilities are not identified."
+      ],
+      "open_questions": [
+        "Who currently owns the ticket queue?",
+        "What system or tool is used for the queue?",
+        "What information is copied from emails or collected during phone calls?",
+        "How are phone requests recorded today?",
+        "What criteria are currently used to assign priority?",
+        "Which tickets should receive manager review?",
+        "Are there existing service-level targets or escalation rules?",
+        "How many tickets arrive by email versus phone, and what is the volume?",
+        "Are there privacy, security, or compliance considerations for ticket contents?"
+      ],
+      "recommended_next_steps": [
+        "Map the current intake process for both email and phone requests, including all fields captured and handoffs.",
+        "Identify the queue system, its ownership, and any available integration options.",
+        "Document current prioritization practices and compare how different analysts assign priority.",
+        "Define queue ownership, manager review rules, and escalation responsibilities.",
+        "Assess whether a deterministic email-to-queue integration would cover the main manual work before considering AI-based solutions."
+      ]
+    }
+  },
+  {
+    "id": "T03",
+    "name": "Missing information",
+    "status": "SUCCESS",
+    "analysis": {
+      "workflow_name": "Prior Authorization Intake",
+      "summary": "Managers want to automate the prior authorization intake process because they report that it is slow and requires manual work. The notes do not describe the current workflow in sufficient detail.",
+      "stakeholders": [
+        "Managers"
+      ],
+      "current_process": [],
+      "pain_points": [
+        "The process is reported to be slow.",
+        "The process requires manual work."
+      ],
+      "automation_opportunities": [
+        {
+          "title": "Conduct intake workflow discovery",
+          "opportunity_type": "Process Change",
+          "description": "Document how prior authorization requests arrive, who handles them, which systems are involved, and how completeness is determined before selecting an automation approach.",
+          "rationale": "The notes identify a desire to automate but do not provide enough information to determine whether the appropriate solution is AI, deterministic automation, or a process redesign."
+        }
+      ],
+      "risks": [
+        "The appropriate automation approach cannot be assessed without details about request sources, processing responsibilities, systems, and completeness criteria."
+      ],
+      "open_questions": [
+        "How do prior authorization requests arrive, such as through a portal, fax, email, phone, or other channels?",
+        "Who receives, reviews, and processes the requests?",
+        "What systems are used during intake?",
+        "What information or documents determine whether a request is complete?",
+        "What happens when a request is incomplete?",
+        "What specific manual tasks make the process slow?",
+        "Are there different intake paths or requirements for different request types?",
+        "What outcomes or measures would define a successful improvement?"
+      ],
+      "recommended_next_steps": [
+        "Interview the managers and intake staff to map the current process from request receipt through intake completion.",
+        "Inventory request channels, systems, required fields, and document requirements.",
+        "Document how incomplete requests are identified and handled.",
+        "Measure current processing time, manual touchpoints, and common causes of delay.",
+        "Evaluate whether the documented steps are best addressed through process changes, deterministic automation, or AI-based extraction and classification."
+      ]
+    }
+  },
+  {
+    "id": "T04",
+    "name": "Conflicting information",
+    "status": "SUCCESS",
+    "analysis": {
+      "workflow_name": "Schedule Change Approval",
+      "summary": "The notes describe an approval process for schedule changes, but stakeholders disagree about whether manager approval is always required before finalization.",
+      "stakeholders": [
+        "Operations manager",
+        "Scheduling coordinator",
+        "Supervisors",
+        "Managers"
+      ],
+      "current_process": [
+        "A schedule change is proposed.",
+        "The schedule change is approved before it is finalized.",
+        "The required approver is disputed: the operations manager states that a manager must approve every change, while the scheduling coordinator states that supervisors regularly approve changes without manager involvement."
+      ],
+      "pain_points": [
+        "The documented or understood approval process is inconsistent across stakeholders.",
+        "It is unclear whether supervisor approval is valid for some or all schedule changes."
+      ],
+      "automation_opportunities": [
+        {
+          "title": "Clarify approval policy before automating",
+          "opportunity_type": "Process Change",
+          "description": "Define and align the organization on who is authorized to approve schedule changes and whether approval requirements vary by situation before implementing automation.",
+          "rationale": "The primary issue is a conflict in the described business process, not an identified technical limitation. Automating the current process without resolving the conflict could encode the wrong approval rule."
+        },
+        {
+          "title": "Automated approval routing after policy validation",
+          "opportunity_type": "Deterministic Automation",
+          "description": "Once approval rules are confirmed, route schedule changes to the required approver or approval chain and prevent finalization until the required approval is recorded.",
+          "rationale": "Approval routing and finalization controls can be handled with predefined business rules, but the notes do not establish the correct rules yet."
+        }
+      ],
+      "risks": [
+        "Automating the process before resolving the conflicting approval descriptions could cause unauthorized approvals or unnecessary approval delays.",
+        "The notes do not establish whether supervisors and managers have different authority based on schedule-change type or circumstances."
+      ],
+      "open_questions": [
+        "Is manager approval required for every schedule change, or can supervisors approve certain changes?",
+        "If supervisors can approve changes, what conditions or change types permit this?",
+        "Are supervisors considered managers for purposes of the approval policy?",
+        "Which approval rule is the authoritative current policy?",
+        "What should happen when the required approver is unavailable?"
+      ],
+      "recommended_next_steps": [
+        "Identify the authoritative approval policy or decision owner.",
+        "Walk through representative schedule-change scenarios with the operations manager, scheduling coordinator, supervisors, and managers.",
+        "Document approval authority by change type or circumstance, including who may finalize a change.",
+        "Only after policy alignment, validate whether deterministic approval routing and finalization controls are needed."
+      ]
+    }
+  },
+  {
+    "id": "T05",
+    "name": "Obvious deterministic automation",
+    "status": "SUCCESS",
+    "analysis": {
+      "workflow_name": "Pending Billing Item Escalation",
+      "summary": "Each morning, an analyst downloads a CSV report from the billing system, filters for pending items open more than 14 days, copies matching rows into a tracking spreadsheet, and emails the billing manager.",
+      "stakeholders": [
+        "Analyst",
+        "Billing manager"
+      ],
+      "current_process": [
+        "Analyst downloads a CSV report from the billing system each morning.",
+        "Analyst filters rows where Status equals Pending and Days Open is greater than 14.",
+        "Analyst copies the matching rows into a tracking spreadsheet.",
+        "Analyst emails the tracking results to the billing manager."
+      ],
+      "pain_points": [
+        "The analyst performs the same filtering and copying steps every morning.",
+        "The workflow relies on manual transfer of matching rows into a tracking spreadsheet.",
+        "The billing manager depends on a recurring email for visibility into qualifying items."
+      ],
+      "automation_opportunities": [
+        {
+          "title": "Automate report filtering and tracking update",
+          "opportunity_type": "Deterministic Automation",
+          "description": "Use predefined rules to identify rows with Status equal to Pending and Days Open greater than 14, then add the matching rows to the tracking spreadsheet.",
+          "rationale": "The filtering rules are explicitly stated and always the same, making deterministic automation more appropriate than AI."
+        },
+        {
+          "title": "Automate recurring notification",
+          "opportunity_type": "Deterministic Automation",
+          "description": "After the qualifying rows are identified and recorded, automatically email the billing manager with the results.",
+          "rationale": "The notification is a repeatable, rules-based step that does not require language understanding or judgment."
+        }
+      ],
+      "risks": [
+        "Automation depends on reliable access to the billing system report and the tracking spreadsheet.",
+        "The notes do not specify how the CSV is retrieved, whether the report format is consistent, or how duplicate tracking entries should be handled."
+      ],
+      "open_questions": [
+        "Can the CSV report download be scheduled or accessed programmatically?",
+        "Is the CSV structure and column naming consistent over time?",
+        "Should previously reported rows be added again, updated, or excluded from future tracking updates?",
+        "What should happen when no rows meet the filtering criteria?",
+        "Are there any required email subject, attachment, or formatting conventions?"
+      ],
+      "recommended_next_steps": [
+        "Confirm available access methods for downloading the billing report and updating the tracking spreadsheet.",
+        "Validate the CSV schema and the exact comparison behavior for Status and Days Open.",
+        "Define duplicate-handling and no-results behavior.",
+        "Prototype and test a deterministic workflow using sample daily reports."
+      ]
+    }
+  },
+  {
+    "id": "T06",
+    "name": "Poor AI use case",
+    "status": "SUCCESS",
+    "analysis": {
+      "workflow_name": "Inventory Replenishment",
+      "summary": "The inventory team replenishes items when available quantity falls below 10 by creating a purchase request for 20 additional units. Both values are fixed.",
+      "stakeholders": [
+        "Inventory team"
+      ],
+      "current_process": [
+        "Monitor the available quantity of each item.",
+        "When an item's available quantity drops below 10, create a purchase request.",
+        "Request 20 additional units."
+      ],
+      "pain_points": [
+        "The notes do not identify a current pain point; they only state a desire to improve supply replenishment."
+      ],
+      "automation_opportunities": [
+        {
+          "title": "Rule-based replenishment trigger",
+          "opportunity_type": "Deterministic Automation",
+          "description": "Automatically monitor available quantities and create a purchase request for 20 units whenever an item's quantity falls below 10.",
+          "rationale": "The trigger threshold and reorder quantity are fixed, making this a straightforward rules-based workflow. An AI model is not needed to interpret or decide when the request should be created."
+        },
+        {
+          "title": "AI-based replenishment decision",
+          "opportunity_type": "Not Recommended",
+          "description": "Do not use an AI model to determine whether to create the purchase request under the current fixed-rule process.",
+          "rationale": "The decision is fully specified by a deterministic threshold and quantity. The notes provide no need for interpretation, prediction, or other language-based reasoning."
+        }
+      ],
+      "risks": [
+        "The notes do not specify where available quantities are recorded or how purchase requests are created.",
+        "The notes do not clarify whether duplicate requests could be created while an earlier request is still outstanding.",
+        "The notes do not specify exceptions, such as unavailable suppliers or items with special handling."
+      ],
+      "open_questions": [
+        "What system or source contains the available quantity for each item?",
+        "Where should the purchase request be created or submitted?",
+        "How should the workflow prevent duplicate requests for the same replenishment need?",
+        "Are there any exceptions to the fixed threshold of 10 or reorder quantity of 20?",
+        "What does 'available quantity' include, and how frequently should it be checked?"
+      ],
+      "recommended_next_steps": [
+        "Confirm the inventory data source and the purchase-request destination.",
+        "Define the monitoring frequency or event trigger for quantity changes.",
+        "Clarify duplicate-request handling and any replenishment exceptions.",
+        "Implement and validate a deterministic rule: if available quantity is below 10, create a request for 20 units."
+      ]
+    }
+  },
+  {
+    "id": "T07",
+    "name": "Prompt injection embedded in notes",
+    "status": "SUCCESS",
+    "analysis": {
+      "workflow_name": "Issue Description Summarization for Triage",
+      "summary": "Customers submit issue descriptions, sometimes containing unusual or instruction-like text. The analyst team wants these descriptions summarized to support triage.",
+      "stakeholders": [
+        "Customers",
+        "Analyst team",
+        "Analyst manager"
+      ],
+      "current_process": [
+        "Customers submit text in the Issue Description field.",
+        "The analyst team reviews submitted issue descriptions for triage.",
+        "The analyst team wants summaries of the submitted descriptions."
+      ],
+      "pain_points": [
+        "Issue descriptions may contain unusual or instruction-like text that could distract from the underlying customer issue.",
+        "Analyst triage would benefit from concise summaries of submitted descriptions."
+      ],
+      "automation_opportunities": [
+        {
+          "title": "Summarize submitted issue descriptions",
+          "opportunity_type": "AI",
+          "description": "Use an AI summarization step to produce a concise triage summary from each customer-submitted Issue Description, while treating embedded instructions as customer-provided content rather than directions for the summarizer.",
+          "rationale": "The task involves summarizing potentially unstructured customer text, which is an appropriate use of language-based reasoning. The example also demonstrates the need to distinguish issue content from instructions."
+        }
+      ],
+      "risks": [
+        "Customer-provided text may include prompt-injection-like instructions intended to alter the summarization behavior.",
+        "The notes do not specify the required summary format, level of detail, or handling of sensitive content.",
+        "A summary could omit or distort information important for triage if it is not validated."
+      ],
+      "open_questions": [
+        "What fields or structure should the triage summary contain?",
+        "Who reviews or acts on the generated summaries?",
+        "Should the original Issue Description always be shown alongside the summary?",
+        "What types of unusual, irrelevant, or malicious content should be flagged separately?",
+        "Are there accuracy, privacy, retention, or escalation requirements for customer-submitted text?",
+        "Is summarization intended to be automatic for every submission or reviewed before use?"
+      ],
+      "recommended_next_steps": [
+        "Define the required triage-summary format and examples of useful summaries.",
+        "Collect representative Issue Description samples, including unusual or instruction-like text.",
+        "Test summarization quality and resilience against embedded instructions.",
+        "Decide whether summaries require human review and establish handling rules for uncertain or potentially harmful content.",
+        "Validate how summaries will be presented alongside the original customer submission."
+      ]
+    }
+  },
+  {
+    "id": "T08",
+    "name": "Very limited notes",
+    "status": "SUCCESS",
+    "analysis": {
+      "workflow_name": "Discharge Paperwork",
+      "summary": "Nurses report that completing discharge paperwork takes too long. No further workflow details were provided.",
+      "stakeholders": [
+        "Nurses"
+      ],
+      "current_process": [],
+      "pain_points": [
+        "Discharge paperwork is perceived by nurses to take too long."
+      ],
+      "automation_opportunities": [
+        {
+          "title": "Investigate discharge paperwork bottlenecks",
+          "opportunity_type": "Process Change",
+          "description": "Map the discharge paperwork process to identify which steps, fields, approvals, or handoffs consume the most time before selecting a solution.",
+          "rationale": "The notes identify a time problem but do not indicate whether the cause is manual data entry, unclear requirements, repeated documentation, or another process issue."
+        }
+      ],
+      "risks": [
+        "The source of the delay is unknown.",
+        "Changing or automating discharge documentation without understanding requirements could create errors or omissions."
+      ],
+      "open_questions": [
+        "Which specific discharge paperwork tasks take the most time?",
+        "Who completes, reviews, and approves the paperwork?",
+        "What systems or forms are involved?",
+        "How long does the process currently take, and what duration is considered acceptable?",
+        "Is information entered repeatedly or copied between systems?",
+        "Are delays caused by missing information, approvals, system usability, or policy requirements?",
+        "Are there compliance, clinical, or documentation requirements that limit changes?"
+      ],
+      "recommended_next_steps": [
+        "Observe or interview nurses while they complete discharge paperwork.",
+        "Document the end-to-end steps, systems, forms, handoffs, and approval points.",
+        "Measure time spent on each step and identify rework or duplicate entry.",
+        "Assess whether the primary opportunity is process redesign, deterministic automation, or AI-assisted extraction or drafting."
+      ]
+    }
+  },
+  {
+    "id": "T09",
+    "name": "Explicit constraints",
+    "status": "SUCCESS",
+    "analysis": {
+      "workflow_name": "Clinical Documentation Using Embedded Voice-to-Text",
+      "summary": "Nurses want to reduce the time spent on documentation by using the current application's embedded voice-to-text function. Management is evaluating the efficiency benefit while raising concerns about HIPAA compliance, protected health information (PHI), and auditability.",
+      "stakeholders": [
+        "Nurses",
+        "Management"
+      ],
+      "current_process": [
+        "Nurses spend time completing documentation.",
+        "Nurses want to use the embedded voice-to-text function in the current application to reduce documentation time.",
+        "Management is assessing whether the voice-to-text capability can be used without creating HIPAA, PHI, or auditability issues."
+      ],
+      "pain_points": [
+        "Nurses spend substantial time on documentation.",
+        "Management is concerned that the embedded voice-to-text tool may not be HIPAA compliant.",
+        "There is concern that PHI could be sent to unapproved external systems.",
+        "Automated decisions must be auditable, creating an implementation constraint."
+      ],
+      "automation_opportunities": [
+        {
+          "title": "Evaluate and govern embedded voice-to-text use",
+          "opportunity_type": "Process Change",
+          "description": "Establish an approval and usage process for the embedded voice-to-text function, including confirmation of where audio and transcribed content are processed, whether PHI remains within approved systems, and how usage is monitored.",
+          "rationale": "The notes identify compliance, PHI handling, and auditability concerns. The primary need is governance and validation of the existing application capability rather than adding a separate AI system."
+        },
+        {
+          "title": "Use application-native voice-to-text for documentation",
+          "opportunity_type": "AI",
+          "description": "If the current application's embedded capability is verified as approved for PHI and supports required audit controls, use it to transcribe nurses' dictated documentation within the current application.",
+          "rationale": "Voice-to-text is a language-based transcription capability that could directly reduce documentation time. However, its use depends on confirming HIPAA compliance, approved data handling, and auditability."
+        },
+        {
+          "title": "Maintain an auditable review and sign-off step",
+          "opportunity_type": "Deterministic Automation",
+          "description": "Configure or define a deterministic workflow in the current application, where dictated or transcribed documentation is associated with the responsible user and reviewed or signed off before becoming final, if supported by the application.",
+          "rationale": "The requirement that every automated decision be auditable is best addressed with predictable logging, attribution, and review controls rather than additional language-model behavior. The notes do not confirm whether the current application supports these controls."
+        }
+      ],
+      "risks": [
+        "The embedded voice-to-text tool may not be HIPAA compliant.",
+        "PHI may be transmitted to an unapproved external system.",
+        "The current application may not provide sufficient audit logs or attribution for automated outputs or decisions.",
+        "The notes do not establish whether the voice-to-text function processes audio or text outside the approved environment.",
+        "The notes do not clarify whether voice-to-text is transcription only or also makes automated decisions."
+      ],
+      "open_questions": [
+        "Has the embedded voice-to-text function been formally reviewed and approved for HIPAA-regulated use?",
+        "Where are audio recordings and transcriptions processed, stored, and retained?",
+        "Does the tool transmit PHI to any external provider or system?",
+        "Is there a business associate agreement or other required compliance documentation for any service involved?",
+        "What audit records does the current application provide for dictated content, transcription changes, approvals, and finalization?",
+        "Are nurses required to review and confirm the transcription before it is saved as final documentation?",
+        "What does 'automated decision' refer to in this workflow, and does the voice-to-text feature make decisions beyond transcription?",
+        "Can the solution be implemented entirely within the current application without exporting PHI?",
+        "What documentation fields and use cases are in scope for voice-to-text?",
+        "What efficiency improvement do nurses and management expect or need to validate?"
+      ],
+      "recommended_next_steps": [
+        "Identify the exact embedded voice-to-text feature, its provider, and its data-processing architecture.",
+        "Conduct a privacy, security, and compliance review focused on HIPAA, PHI transmission, storage, and retention.",
+        "Verify that no PHI is sent to unapproved external systems and document the approved data flow.",
+        "Test the current application's audit logging, user attribution, review, correction, and sign-off capabilities.",
+        "Run a controlled pilot with representative nursing documentation after compliance approval.",
+        "Measure documentation time and transcription accuracy during the pilot, while requiring human review before finalization if supported and appropriate."
+      ]
+    }
+  },
+  {
+    "id": "T10",
+    "name": "Mixed opportunity types",
+    "status": "SUCCESS",
+    "analysis": {
+      "workflow_name": "Renewal Request Intake and Routing",
+      "summary": "Customer success representatives review incoming renewal emails, classify the request as pricing, contract terms, or account changes, and copy it into the CRM. The CRM routes the request automatically after a category is assigned.",
+      "stakeholders": [
+        "Customer success representatives"
+      ],
+      "current_process": [
+        "Representatives read incoming renewal emails.",
+        "They determine whether the request concerns pricing, contract terms, or account changes.",
+        "They copy the request into the CRM.",
+        "The CRM automatically routes the request after a category is assigned."
+      ],
+      "pain_points": [
+        "Representatives manually classify incoming renewal emails.",
+        "Representatives manually copy requests into the CRM.",
+        "Required CRM fields are sometimes skipped.",
+        "Routing depends on the category being assigned correctly."
+      ],
+      "automation_opportunities": [
+        {
+          "title": "Classify renewal emails and populate CRM records",
+          "opportunity_type": "AI",
+          "description": "Use language-based classification and extraction to identify whether an email concerns pricing, contract terms, or account changes, then populate the corresponding CRM request fields and copied request content.",
+          "rationale": "The workflow requires interpreting unstructured email text and assigning one of several categories, which is an appropriate use of AI. The CRM already provides routing once the category is assigned."
+        },
+        {
+          "title": "Enforce required CRM fields",
+          "opportunity_type": "Deterministic Automation",
+          "description": "Configure CRM validation or submission controls so a request cannot be completed or routed when required fields are blank.",
+          "rationale": "Preventing skipped fields is a predefined validation problem that can be handled reliably with CRM rules rather than AI."
+        }
+      ],
+      "risks": [
+        "Incorrect email classification could result in incorrect CRM routing.",
+        "The effectiveness of automated routing depends on the category being assigned and required fields being populated.",
+        "The notes do not specify which CRM fields are required or whether the CRM supports automated email ingestion and field population."
+      ],
+      "open_questions": [
+        "Are incoming renewal emails received in a centralized mailbox or another system?",
+        "Which CRM fields are required, and which fields should be populated from the email?",
+        "Can the CRM accept email content directly or support an integration for creating and updating requests?",
+        "Are requests always limited to one of the three categories, or can an email involve multiple categories?",
+        "What should happen when an email is ambiguous or cannot be confidently classified?",
+        "Are representatives expected to review and approve automatically populated records before routing?"
+      ],
+      "recommended_next_steps": [
+        "Confirm the CRM's capabilities for email ingestion, field population, validation, and routing.",
+        "Review representative examples of renewal emails, including ambiguous and multi-topic requests, to assess classification accuracy.",
+        "Define the required CRM fields and the handling process for low-confidence or incomplete classifications.",
+        "Prototype automated classification and CRM record creation with human review before enabling automatic routing."
+      ]
+    }
+  }
+]
